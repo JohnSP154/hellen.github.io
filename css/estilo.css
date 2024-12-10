@@ -1,0 +1,212 @@
+/* Reset general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body general */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0e5f9; /* Fondo suave color lavanda */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centrado de todo el contenido */
+}
+
+/* Contenedor de las letras (animación de flores) */
+.flower-container {
+    position: relative;
+    width: 80%; /* Ancho flexible */
+    max-width: 600px; /* Máximo tamaño */
+    height: 120px; /* Altura fija para mantener la proporción */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    z-index: 2;
+}
+
+/* Estilo de las letras */
+.letter {
+    font-size: 10vw; /* Tamaño flexible basado en el ancho de la pantalla */
+    position: absolute;
+    opacity: 0;
+    font-weight: bold;
+    color: #ff66b2; /* Color rosado */
+    transition: all 1s ease-out;
+}
+
+/* Animación de caída de pétalos */
+@keyframes fall {
+    0% {
+        top: -50px;
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+    100% {
+        top: 100vh;
+        opacity: 0;
+        transform: rotate(360deg);
+    }
+}
+
+/* Estilo de los pétalos */
+.petal {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #9b59b6; /* Color lila */
+    border-radius: 50%;
+    animation: fall linear infinite;
+    opacity: 0;
+}
+
+/* Pétalos de diferentes tamaños y duraciones */
+.petal:nth-child(odd) {
+    animation-duration: 8s;
+    width: 25px;
+    height: 25px;
+}
+
+.petal:nth-child(even) {
+    animation-duration: 12s;
+    width: 15px;
+    height: 15px;
+}
+
+/* Estilo para el texto "SheyPadilla" */
+.copy-text {
+    font-size: 10vw; /* Tamaño flexible para adaptarse a diferentes pantallas */
+    font-weight: bold;
+    color: #9b59b6; /* Color lila */
+    opacity: 0;
+    animation: fadeIn 2s ease-in-out forwards;
+    z-index: 1; /* Asegura que el texto esté sobre los pétalos */
+    letter-spacing: -1px; /* Reduce el espacio entre letras */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/* Animación para el texto "SheyPadilla" */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Footer con el reproductor de audio */
+footer {
+    background-color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: fixed; /* Fijo al fondo */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Personalización del reproductor de audio */
+audio {
+    width: 80%; /* Ancho flexible */
+    max-width: 300px; /* Tamaño máximo */
+    background-color: transparent;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+}
+
+/* Personalización de los controles de audio */
+audio::-webkit-media-controls-panel {
+    background-color: #f8b0c8; /* Rosa suave */
+    border-radius: 10px;
+    padding: 5px;
+    border: none;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-volume-slider {
+    background-color: transparent; /* Botones transparentes */
+    border-radius: 50%;
+}
+
+audio::-webkit-media-controls-play-button {
+    color: #e63946; /* Color del botón de play */
+}
+
+audio::-webkit-media-controls-volume-slider {
+    background-color: #ff8cbf; /* Rosa para el control de volumen */
+    height: 4px;
+    border-radius: 5px;
+}
+
+/* Eliminar bordes y estilos no deseados */
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+    font-weight: bold;
+    color: #e63946; /* Rosa para los tiempos */
+}
+
+/* Hover en el reproductor */
+audio:hover {
+    transform: scale(1.05); /* Ligeramente más grande */
+    transition: transform 0.2s ease-in-out; /* Transición suave */
+}
+
+/* Media Query para pantallas muy pequeñas (móviles) */
+@media (max-width: 600px) {
+    .copy-text {
+        font-size: 12vw; /* Tamaño de fuente más pequeño en móviles */
+        letter-spacing: -1px; /* Ajuste del espacio entre letras */
+    }
+
+    /* Ajustar tamaño del reproductor */
+    audio {
+        width: 80%; /* Hacer el reproductor más pequeño */
+        max-width: 250px; /* Tamaño máximo */
+    }
+}
+
+/* Media Query para pantallas medianas (tabletas) */
+@media (max-width: 1024px) {
+    .copy-text {
+        font-size: 8vw; /* Tamaño más pequeño en tabletas */
+    }
+
+    .flower-container {
+        width: 90%;
+    }
+
+    /* Ajustar tamaño del reproductor */
+    audio {
+        width: 70%;
+    }
+}
+
+/* Media Query para pantallas grandes (desktop y más) */
+@media (min-width: 1025px) {
+    .copy-text {
+        font-size: 5vw; /* Tamaño moderado en pantallas grandes */
+    }
+
+    .flower-container {
+        width: 80%;
+    }
+
+    /* Ajustar tamaño del reproductor */
+    audio {
+        width: 60%;
+        max-width: 400px; /* Tamaño máximo para pantallas grandes */
+    }
+}
